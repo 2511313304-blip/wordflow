@@ -45,6 +45,7 @@ capture: 捕获、拍摄
 图标文件位于 `icons/`：
 
 - `wordflow-uploaded-source.png`：上传原图备份
+- `wordflow-icon-180.png`：iPhone / 手机触屏图标
 - `wordflow-icon-192.png`：手机桌面小图标
 - `wordflow-icon-512.png`：PWA / Chrome 添加桌面图标
 
