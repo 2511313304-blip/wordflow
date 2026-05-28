@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WordFlow 单词复习</title>
+    <meta name="theme-color" content="#255f4b" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./icons/wordflow-icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./icons/wordflow-icon-192.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">WordFlow</p>
+          <h1>今天的单词</h1>
+        </div>
+        <button class="icon-button" id="resetSessionBtn" type="button" aria-label="重置当前进度">
+          <span aria-hidden="true">↻</span>
+        </button>
+      </header>
+
+      <section class="stats-grid" aria-label="学习概览">
+        <article>
+          <span id="totalCount">0</span>
+          <p>词库</p>
+        </article>
+        <article>
+          <span id="learnedCount">0</span>
+          <p>掌握</p>
+        </article>
+        <article>
+          <span id="reviewCount">0</span>
+          <p>待复习</p>
+        </article>
+      </section>
+
+      <section class="panel input-panel">
+        <div class="section-title">
+          <h2>添加单词</h2>
+          <button class="ghost-button" id="sampleBtn" type="button">示例</button>
+        </div>
+        <textarea
+          id="wordInput"
+          rows="5"
+          placeholder="每行一个：apple 苹果&#10;也可以写：renew / 更新、恢复"
+        ></textarea>
+        <button class="primary-button" id="addWordsBtn" type="button">加入今天计划</button>
+      </section>
+
+      <section class="panel controls-panel">
+        <div class="control-group">
+          <p>模式</p>
+          <div class="segmented" role="tablist" aria-label="选择学习模式">
+            <button class="segment is-active" data-mode="learn" type="button">学习</button>
+            <button class="segment" data-mode="review" type="button">复习</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <p>档位</p>
+          <div class="segmented" role="tablist" aria-label="选择单词数量">
+            <button class="segment is-active" data-size="20" type="button">20</button>
+            <button class="segment" data-size="50" type="button">50</button>
+            <button class="segment" data-size="100" type="button">100</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="study-area" aria-live="polite">
+        <div class="progress-row">
+          <span id="sessionLabel">学习 · 20</span>
+          <span id="progressText">0 / 0</span>
+        </div>
+        <div class="progress-track">
+          <div id="progressBar"></div>
+        </div>
+
+        <button class="card-scene" id="card" type="button" aria-label="点击翻转单词卡">
+          <div class="word-card">
+            <div class="card-face card-front">
+              <p class="card-kicker" id="cardKicker">准备开始</p>
+              <h2 id="cardWord">添加单词</h2>
+              <p id="cardHint">点击下方按钮生成学习队列</p>
+            </div>
+            <div class="card-face card-back">
+              <p class="card-kicker">释义</p>
+              <h2 id="cardMeaning">等待你的词表</h2>
+              <p id="cardNote">点击卡片可回到单词面</p>
+            </div>
+          </div>
+        </button>
+
+        <div class="action-row">
+          <button class="secondary-button" id="againBtn" type="button">不熟</button>
+          <button class="primary-button" id="knowBtn" type="button">记住了</button>
+        </div>
+      </section>
+
+      <nav class="bottom-actions" aria-label="快捷操作">
+        <button id="startBtn" type="button">开始</button>
+        <button id="shuffleBtn" type="button">打乱</button>
+        <button id="libraryBtn" type="button">词库</button>
+        <button id="clearBtn" type="button">清空</button>
+      </nav>
+    </main>
+
+    <section class="library-overlay" id="libraryOverlay" hidden>
+      <div class="library-sheet" role="dialog" aria-modal="true" aria-labelledby="libraryTitle">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">Library</p>
+            <h2 id="libraryTitle">全部单词</h2>
+          </div>
+          <button class="icon-button" id="closeLibraryBtn" type="button" aria-label="关闭词库">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="library-summary" id="librarySummary">共 0 个单词</div>
+        <div class="word-list" id="wordList"></div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
